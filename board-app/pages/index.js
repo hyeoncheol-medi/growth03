@@ -9,7 +9,7 @@ function ContentForm() {
       content: event.target.content.value,
     }
     const JSONdata = JSON.stringify(data)
-    const endpoint = `${server}/articles/`
+    const endpoint = `/api/articles`
 
     const options = {
       method: 'POST',
@@ -34,9 +34,9 @@ function ContentForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="mb-3">
-        <label htmlFor="content" class="form-label">암거나 쓰고 엔터</label>
-        <input type="text" class="form-control" id="content" name="content" ref={inputRef}/>
+      <div className="mb-3">
+        <label htmlFor="content" className="form-label">암거나 쓰고 엔터</label>
+        <input type="text" className="form-control" id="content" name="content" ref={inputRef}/>
       </div>
     </form>
   )
@@ -44,7 +44,7 @@ function ContentForm() {
 
 
 export async function getServerSideProps() {
-  const res = await fetch(`${server}/articles`, {headers: {'Content-Type': 'application/json'}})
+  const res = await fetch(`${server}/api/articles`, {headers: {'Content-Type': 'application/json'}})
   const data = await res.json()
   return { props: { data } }
 }
@@ -71,10 +71,10 @@ export default function Home(props) {
         <div className='flex-column'>
           {
             props.data.map(article => 
-              <div class="card mb-2 shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">{article.content}</h5>
-                  <p class="card-text">{article.created_before}</p>
+              <div className="card mb-2 shadow-sm" key={article.created_before}>
+                <div className="card-body">
+                  <h5 className="card-title">{article.content}</h5>
+                  <p className="card-text">{article.created_before}</p>
                 </div>
               </div>
             )

@@ -20,10 +20,10 @@ from rest_framework import routers
 from board import views
 
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'articles', views.AritlceViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('api/', include(router.urls))
 ]
